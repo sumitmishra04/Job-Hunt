@@ -38,8 +38,7 @@ function JobForm() {
         jobRequirements &&
         tags &&
         companyName &&
-        contactInfo &&
-        jobDescriptionDoc
+        contactInfo 
       )
     ) {
       setErrorMessage("All fields are required")
@@ -111,7 +110,6 @@ function JobForm() {
           marginRight="sm"
           color="grey700"
           size="md"
-          required
           width="300px"
         />
         <Container width="100%" display="flex">

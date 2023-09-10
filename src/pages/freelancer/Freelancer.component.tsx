@@ -28,7 +28,7 @@ function Freelancer() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const { dispatch: appDispatch } = useContext(AppContext)
   const [currentTab, setCurrentTab] = useState(TABS[0])
-  let [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   let { id } = useParams()
   const isViewOnly = searchParams.get("viewonly")
   const tabsToShow = isViewOnly ? TABS : [...TABS, "Jobs"]

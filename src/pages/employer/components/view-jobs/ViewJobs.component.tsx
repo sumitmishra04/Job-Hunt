@@ -3,10 +3,11 @@ import { Container, Text } from "../../../../components/molecules"
 import { EmployerContext } from "../../Employer.component"
 import { HEADER_ROW } from "./ViewJobs.constants"
 import { css, styled } from "styled-components"
-import { Colours } from "../../../../components/atoms"
+import { Colours, DeviceSize } from "../../../../components/atoms"
 import { Modal } from "../../../../components/organisms"
 import ViewApplicant from "./components/view-applicant/ViewApplicant.component"
 import { JobInterface } from "../../Employer.interfaces"
+import { Device } from "../../../../components/atoms/DeviceSize"
 
 const StyledContainer = styled(Container)``
 
@@ -34,6 +35,13 @@ const StyledText = styled(Text)<any>`
     css`
       color: ${Colours.palette.blue600};
     `};
+
+    @media ${Device.Small} {
+      width: 40%;
+    ${p => p.hideOnSmallScreen && css`
+       display: none;
+    `}
+    }
 `
 
 function ViewJobs() {
@@ -89,11 +97,12 @@ function ViewJobs() {
               content={job.contactInfo}
               isHeader={isHeader}
             />
-            <StyledText width="20%" content={job.tags} isHeader={isHeader} />
+            <StyledText width="20%" content={job.tags} isHeader={isHeader} hideOnSmallScreen/>
             <StyledText
               width="30%"
               content={job.jobRequirements}
               isHeader={isHeader}
+              hideOnSmallScreen
             />
             <StyledText
               width="10%"

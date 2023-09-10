@@ -10,6 +10,7 @@ import { API } from "../../../../../../../../services/api"
 import { FreelancerContext } from "../../../../../../Freelancer.component"
 import { ACTIONS } from "../../../../../../Freelancer.constants"
 import { GitProjectDataInterface } from "./ProfileSearch.interfaces"
+import { useSearchParams } from "react-router-dom"
 
 const SearchWrapper = styled(Container)`
   align-items: center;
@@ -19,14 +20,21 @@ const SearchWrapper = styled(Container)`
 
 function ProfileSearch() {
   const { state, dispatch } = useContext(FreelancerContext)
-
+  
   const [gitUsername, setGitUsername] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  let [searchParams] = useSearchParams()
+  const isViewOnly = searchParams.get("viewonly")
 
   useEffect(() => {
     setGitUsername(state.gitUsername)
-  }, [state.gitUsername])
+    if(isViewOnly && gitUsername) {
+      fetchProjects()
+    }
+  }, [gitUsername, state])
+
+
 
   const getGitProjects = (data: GitProjectDataInterface[]) =>
     data.map(({ id, name, html_url }) => ({
@@ -67,17 +75,9 @@ function ProfileSearch() {
     }
   }
 
-  const fetchProfleData = async () => {
-    const isValid = validateFields()
-
-    if (isValid) {
-      dispatch({
-        type: ACTIONS.SET_USERNAME,
-        data: {
-          username: gitUsername,
-        },
-      })
-      setLoading(true)
+  const fetchProjects = async () => {
+    setLoading(true)
+    console.log(gitUsername)
       try {
         const url = `https://api.github.com/users/${gitUsername}/repos`
         const result = await API.GET(url)
@@ -88,12 +88,29 @@ function ProfileSearch() {
       } finally {
         setLoading(false)
       }
+  }
+
+  const onClickShowProjects = async () => {
+    const isValid = validateFields()
+
+    if (isValid) {
+      dispatch({
+        type: ACTIONS.SET_USERNAME,
+        data: {
+          username: gitUsername,
+        },
+      })
+      fetchProjects()
     }
+  }
+
+  if(isViewOnly) {
+    return null
   }
 
   return (
     <Container marginTop="xxlg" card padding="sm">
-      <SearchWrapper display="flex">
+       <SearchWrapper display="flex">
         <Container width="100%">
           <Input
             placeholder="Add git username"
@@ -104,7 +121,7 @@ function ProfileSearch() {
         <Container width="fit-content">
           <Button
             value={loading ? "Loading..." : "Show Projects"}
-            onClick={fetchProfleData}
+            onClick={onClickShowProjects}
           />
         </Container>
       </SearchWrapper>
