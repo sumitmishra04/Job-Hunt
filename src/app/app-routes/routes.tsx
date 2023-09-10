@@ -22,6 +22,10 @@ const EmployerPage = lazy(
 )
 
 const ROUTES = [
+  { 
+    path: '/', 
+    element: <LoginPage /> 
+  },
   {
     path: "/login",
     element: <LoginPage />,
