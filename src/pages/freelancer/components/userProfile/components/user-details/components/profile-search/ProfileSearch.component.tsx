@@ -29,10 +29,10 @@ function ProfileSearch() {
 
   useEffect(() => {
     setGitUsername(state.gitUsername)
-    if(isViewOnly && gitUsername) {
-      fetchProjects()
+    if(isViewOnly && state.gitUsername) {
+      fetchProjects(state.gitUsername)
     }
-  }, [gitUsername, state])
+  }, [state.gitUsername])
 
 
 
@@ -75,11 +75,10 @@ function ProfileSearch() {
     }
   }
 
-  const fetchProjects = async () => {
+  const fetchProjects = async (username: string) => {
     setLoading(true)
-    console.log(gitUsername)
       try {
-        const url = `https://api.github.com/users/${gitUsername}/repos`
+        const url = `https://api.github.com/users/${username}/repos`
         const result = await API.GET(url)
         const data = await result.json()
         handleResponse(data)
@@ -100,7 +99,7 @@ function ProfileSearch() {
           username: gitUsername,
         },
       })
-      fetchProjects()
+      fetchProjects(gitUsername)
     }
   }
 

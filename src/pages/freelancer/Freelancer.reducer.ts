@@ -47,7 +47,6 @@ function reducer(state = initialState, action: ActionInterface) {
       }
     }
     case ACTIONS.SET_USERNAME: {
-      debugger
       return {
         ...state,
         gitUsername: action.data.username,
