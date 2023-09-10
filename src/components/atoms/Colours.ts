@@ -1,0 +1,51 @@
+export const palette = {
+  grey100: "#F5F7FA",
+  grey200: "#EAECED",
+  grey300: "#CBD2D6",
+  grey400: "#B7BCBF",
+  grey500: "#9DA3A6",
+  grey600: "#687173",
+  grey700: "#2C2E2F",
+  grey800: "#0C0C0D",
+
+  blue100: "#F5FBFE",
+  blue200: "#E4F1FB",
+  blue300: "#BFDBEE",
+  blue400: "#50C7F9",
+  blue500: "#009CDE",
+  blue600: "#0070BA",
+  blue700: "#005EA6",
+  blue800: "#003087",
+  blue900: "#121661",
+
+  green100: "#E6FAF3",
+  green200: "#BFF3E2",
+  green300: "#99EDD1",
+  green400: "#73E6C0",
+  green500: "#00CF92",
+  green600: "#299976",
+  green700: "#018065",
+  green800: "#005438",
+  green900: "#002A1C",
+
+  red100: "#FFF7F7",
+  red150: "#FCE6E6",
+  red200: "#F49999",
+  red300: "#F49999",
+  red400: "#F07373",
+  red500: "#D20000",
+  red600: "#B60000",
+  red700: "#880000",
+  red800: "#5B0000",
+  red900: "#2D0000",
+
+  neutral100: "#F7F5F0",
+  neutral200: "#F1EFEA",
+  neutral300: "#DBD8D0",
+
+  monoWhite: "#FFFFFF",
+  monoBlack: "#000000",
+  transparent: "rgba(0,0,0,0)",
+}
+
+export type ColorType = keyof typeof palette
