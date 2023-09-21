@@ -36,6 +36,7 @@ function Skills({
       {!isViewOnly && (
         <Container display="flex">
           <Text
+            noWrap
             content="Select Skills : "
             color="grey700"
             size="md"
