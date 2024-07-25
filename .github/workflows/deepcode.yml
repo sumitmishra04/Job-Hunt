@@ -1,0 +1,23 @@
+name: DeepCode Analysis
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+      - '**'  # Add other branches you want to analyze
+
+jobs:
+  deepcode:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install DeepCode CLI
+        run: |
+          curl -sL https://deepcode.ai/cli/install | bash
+          sudo apt install deepcode
+
+      - name: Run DeepCode analysis
+        run: deepcode analyze --token ${{ secrets.DEEPCODE_TOKEN }}
