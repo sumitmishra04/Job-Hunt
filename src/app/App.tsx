@@ -33,6 +33,8 @@ interface AppContextInterface {
 export const AppContext = createContext<AppContextInterface | null>(null)
 
 function App() {
+  console.log('App restarted')
+  console.log(timer)
   const routes = useRoutes(ROUTES)
   const [state, dispatch] = useReducer(appReducer, initialState)
 
